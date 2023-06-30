@@ -1,9 +1,13 @@
 package com.khanfar.project2.Entity;
 
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
+
 import lombok.Data;
 
-import javax.persistence.*;
 import java.util.List;
 
 @Entity
@@ -41,8 +45,8 @@ public class Product {
     @OneToMany(mappedBy = "product")
     private List<Stock> stockList ;
 
-    @OneToMany(mappedBy = "product_order")
-    private List<Product_order> product_orders ;
+    @OneToMany(mappedBy = "product")
+    private List<ProductOrder> product_orders ;
 
 
 

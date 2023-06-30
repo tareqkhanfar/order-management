@@ -1,9 +1,12 @@
 package com.khanfar.project2.Entity;
 
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import lombok.Data;
-
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
@@ -19,11 +22,11 @@ public class Stock {
     @Column(name = "quantity")
     private Integer quantity ;
 
-    @Column(name = "updated_at")
+    @Column(name = "update_at")
     private LocalDateTime updatedAt;
 
 
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "product_id")
     @ManyToOne
     private Product product ;
 

@@ -1,14 +1,14 @@
 package com.khanfar.project2.Entity;
 
 
+import jakarta.persistence.*;
 import lombok.Data;
 
-import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-@Table(name = "Order")
+@Table(name = "Order_")
 @Data
 public class Order {
 
@@ -20,10 +20,10 @@ public class Order {
     private LocalDateTime orderedAt ;
 
     @OneToMany(mappedBy = "order")
-    private List<Product_order> product_orders ;
+    private List<ProductOrder> product_orders ;
 
 
     @ManyToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "customer_id")
     private Customer customer ;
 }

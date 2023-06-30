@@ -1,22 +1,27 @@
 package com.khanfar.project2.Entity;
 
 
+import com.khanfar.project2.DTO.ProductOrderId;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import lombok.Data;
+import jakarta.persistence.*;
 
-import javax.persistence.*;
-
+@IdClass(ProductOrderId.class)
 @Entity
 @Table(name = "product_order")
 @Data
-public class Product_order {
+public class ProductOrder {
 
     @Id
     @Column(name = "product_id")
-    private Integer product_id ;
+    private Integer productId ;
 
     @Id
     @Column(name = "order_id")
-    private Integer order_id ;
+    private Integer orderId ;
 
     @Column(name = "quantity")
     private Integer quantity ;
@@ -31,10 +36,10 @@ public class Product_order {
 
 
     @ManyToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "product_id")
     private Product product ;
 
     @ManyToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "order_id")
     private Order order ;
 }
