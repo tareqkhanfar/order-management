@@ -1,6 +1,7 @@
 package com.khanfar.project2.Entity;
 
-
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -11,19 +12,18 @@ import java.util.List;
 @Table(name = "Order_")
 @Data
 public class Order {
-
-
     @Id
     @Column(name = "id")
     private Integer id;
+
     @Column(name = "ordered_At")
-    private LocalDateTime orderedAt ;
+    private LocalDateTime orderedAt;
 
     @OneToMany(mappedBy = "order")
-    private List<ProductOrder> product_orders ;
+    private List<ProductOrder> productOrders;
 
-
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "customer_id")
-    private Customer customer ;
+    private Customer customer;
 }

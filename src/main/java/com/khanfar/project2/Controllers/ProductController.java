@@ -1,5 +1,6 @@
 package com.khanfar.project2.Controllers;
 
+import com.khanfar.project2.DTO.ProductDTO;
 import com.khanfar.project2.Entity.Product;
 import com.khanfar.project2.Service.ProductService;
 import jakarta.validation.Valid;
@@ -20,32 +21,32 @@ public class ProductController {
 
 
     @GetMapping
-    public ResponseEntity<List<Product>> getAllProducts() {
-        List<Product> products = productService.getAllProducts();
+    public ResponseEntity<List<ProductDTO>> getAllProducts() {
+        List<ProductDTO> products = productService.getAllProducts();
         return ResponseEntity.ok(products);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Product> getProductById(@PathVariable Integer id) {
-        Product product = productService.getProductById(id)
+    public ResponseEntity<ProductDTO> getProductById(@PathVariable Integer id) {
+        ProductDTO product = productService.getProductById(id)
                 .orElseThrow(() -> new NotFoundException("Product not found with id: " + id));
         return ResponseEntity.ok(product);
     }
 
     @PostMapping
-    public ResponseEntity<Product> createProduct(@Valid @RequestBody Product product) {
-        Product createdProduct = productService.saveProduct(product);
+    public ResponseEntity<ProductDTO> createProduct(@Valid @RequestBody ProductDTO product) {
+        ProductDTO createdProduct = productService.saveProduct(product);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdProduct);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Product> updateProduct(@PathVariable Integer id, @Validated @RequestBody Product product) {
-        Product existingProduct = productService.getProductById(id)
+    public ResponseEntity<ProductDTO> updateProduct(@PathVariable Integer id, @Validated @RequestBody ProductDTO product) {
+        ProductDTO existingProduct = productService.getProductById(id)
                 .orElseThrow(() -> new NotFoundException("Product not found with id: " + id));
 
         // Update existingProduct properties with product request body
 
-        Product updatedProduct = productService.saveProduct(existingProduct);
+        ProductDTO updatedProduct = productService.saveProduct(existingProduct);
         return ResponseEntity.ok(updatedProduct);
     }
 

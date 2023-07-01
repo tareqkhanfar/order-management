@@ -1,6 +1,7 @@
 package com.khanfar.project2.Entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
@@ -41,10 +42,8 @@ public class Product {
     @Column(name = "stockable")
 
     private Boolean stockable ;
-
     @OneToMany(mappedBy = "product")
     private List<Stock> stockList ;
-
     @OneToMany(mappedBy = "product")
     private List<ProductOrder> product_orders ;
 

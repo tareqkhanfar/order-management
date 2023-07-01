@@ -1,5 +1,6 @@
 package com.khanfar.project2.Controllers;
 
+import com.khanfar.project2.DTO.OrderDTO;
 import com.khanfar.project2.Entity.Order;
 import com.khanfar.project2.Service.OrderService;
 import jakarta.validation.Valid;
@@ -21,32 +22,32 @@ public class OrderController {
 
 
     @GetMapping
-    public ResponseEntity<List<Order>> getAllOrders() {
-        List<Order> orders = orderService.getAllOrders();
+    public ResponseEntity<List<OrderDTO>> getAllOrders() {
+        List<OrderDTO> orders = orderService.getAllOrders();
         return ResponseEntity.ok(orders);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Order> getOrderById(@PathVariable Integer id) {
-        Order order = orderService.getOrderById(id)
+    public ResponseEntity<OrderDTO> getOrderById(@PathVariable Integer id) {
+        OrderDTO order = orderService.getOrderById(id)
                 .orElseThrow(() -> new NotFoundException("Order not found with id: " + id));
         return ResponseEntity.ok(order);
     }
 
     @PostMapping
-    public ResponseEntity<Order> createOrder(@Valid @RequestBody Order order) {
-        Order createdOrder = orderService.saveOrder(order);
+    public ResponseEntity<OrderDTO> createOrder(@Valid @RequestBody OrderDTO order) {
+        OrderDTO createdOrder = orderService.saveOrder(order);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdOrder);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Order> updateOrder(@PathVariable Integer id, @Validated @RequestBody Order order) {
-        Order existingOrder = orderService.getOrderById(id)
+    public ResponseEntity<OrderDTO> updateOrder(@PathVariable Integer id, @Validated @RequestBody OrderDTO order) {
+        OrderDTO existingOrder = orderService.getOrderById(id)
                 .orElseThrow(() -> new NotFoundException("Order not found with id: " + id));
 
         // Update existingOrder properties with order request body
 
-        Order updatedOrder = orderService.saveOrder(existingOrder);
+        OrderDTO updatedOrder = orderService.saveOrder(existingOrder);
         return ResponseEntity.ok(updatedOrder);
     }
 

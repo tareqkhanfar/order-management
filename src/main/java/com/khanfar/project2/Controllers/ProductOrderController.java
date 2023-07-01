@@ -1,5 +1,6 @@
-package com.khanfar.project2.Service;
+package com.khanfar.project2.Controllers;
 
+import com.khanfar.project2.DTO.ProductOrderDTO;
 import com.khanfar.project2.DTO.ProductOrderId;
 import com.khanfar.project2.Entity.ProductOrder;
 import com.khanfar.project2.Exception.NotFoundException;
@@ -22,32 +23,32 @@ public class ProductOrderController {
 
 
     @GetMapping
-    public ResponseEntity<List<ProductOrder>> getAllProductOrders() {
-        List<ProductOrder> productOrders = productOrderService.getAllProductOrders();
+    public ResponseEntity<List<ProductOrderDTO>> getAllProductOrders() {
+        List<ProductOrderDTO> productOrders = productOrderService.getAllProductOrders();
         return ResponseEntity.ok(productOrders);
     }
 
     @GetMapping("/{productId}/{orderId}")
-    public ResponseEntity<ProductOrder> getProductOrderById(@PathVariable Integer productId, @PathVariable Integer orderId) {
-        ProductOrder productOrder = productOrderService.getProductOrderById(new ProductOrderId(productId, orderId))
+    public ResponseEntity<ProductOrderDTO> getProductOrderById(@PathVariable Integer productId, @PathVariable Integer orderId) {
+        ProductOrderDTO productOrder = productOrderService.getProductOrderById(new ProductOrderId(productId, orderId))
                 .orElseThrow(() -> new NotFoundException("Product Order not found with productId: " + productId + " and orderId: " + orderId));
         return ResponseEntity.ok(productOrder);
     }
 
     @PostMapping
-    public ResponseEntity<ProductOrder> createProductOrder(@Valid @RequestBody ProductOrder productOrder) {
-        ProductOrder createdProductOrder = productOrderService.saveProductOrder(productOrder);
+    public ResponseEntity<ProductOrderDTO> createProductOrder(@Valid @RequestBody ProductOrderDTO productOrder) {
+        ProductOrderDTO createdProductOrder = productOrderService.saveProductOrder(productOrder);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdProductOrder);
     }
 
     @PutMapping("/{productId}/{orderId}")
-    public ResponseEntity<ProductOrder> updateProductOrder(@PathVariable Integer productId, @PathVariable Integer orderId, @Validated @RequestBody ProductOrder productOrder) {
-        ProductOrder existingProductOrder = productOrderService.getProductOrderById(new ProductOrderId(productId, orderId))
+    public ResponseEntity<ProductOrderDTO> updateProductOrder(@PathVariable Integer productId, @PathVariable Integer orderId, @Validated @RequestBody ProductOrderDTO productOrder) {
+        ProductOrderDTO existingProductOrder = productOrderService.getProductOrderById(new ProductOrderId(productId, orderId))
                 .orElseThrow(() -> new NotFoundException("Product Order not found with productId: " + productId + " and orderId: " + orderId));
 
         // Update existingProductOrder properties with productOrder request body
 
-        ProductOrder updatedProductOrder = productOrderService.saveProductOrder(existingProductOrder);
+        ProductOrderDTO updatedProductOrder = productOrderService.saveProductOrder(existingProductOrder);
         return ResponseEntity.ok(updatedProductOrder);
     }
 
