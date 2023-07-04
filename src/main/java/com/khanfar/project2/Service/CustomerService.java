@@ -39,31 +39,27 @@ public class CustomerService {
         customerRepository.deleteById(id);
     }
 
-    private CustomerDTO convertToDTO(Customer customer) {
+    public CustomerDTO convertToDTO(Customer customer) {
         CustomerDTO customerDTO = new CustomerDTO();
         customerDTO.setId(customer.getId());
         customerDTO.setFirstName(customer.getFirstName());
         customerDTO.setLastName(customer.getLastName());
         customerDTO.setBornAt(customer.getBornAt());
-        customerDTO.setOrderList(customer.getOrderList().stream()
-                .map(this::convertOrderToDTO)
-                .collect(Collectors.toList()));
+
         return customerDTO;
     }
 
-    private Customer convertToEntity(CustomerDTO customerDTO) {
+    public Customer convertToEntity(CustomerDTO customerDTO) {
         Customer customer = new Customer();
         customer.setId(customerDTO.getId());
         customer.setFirstName(customerDTO.getFirstName());
         customer.setLastName(customerDTO.getLastName());
         customer.setBornAt(customerDTO.getBornAt());
-        customer.setOrderList(customerDTO.getOrderList().stream()
-                .map(this::convertOrderToEntity)
-                .collect(Collectors.toList()));
+
         return customer;
     }
 
-    private OrderDTO convertOrderToDTO(Order order) {
+    public OrderDTO convertOrderToDTO(Order order) {
         OrderDTO orderDTO = new OrderDTO();
         orderDTO.setId(order.getId());
         orderDTO.setOrderedAt(order.getOrderedAt());

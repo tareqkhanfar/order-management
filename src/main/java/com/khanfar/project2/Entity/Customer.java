@@ -1,6 +1,7 @@
 package com.khanfar.project2.Entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -33,6 +34,7 @@ public class Customer {
 
     @JsonManagedReference
 
+    @JsonIgnore
     @OneToMany(mappedBy = "customer")
     private List<Order> orderList ;
 }
