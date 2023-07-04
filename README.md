@@ -10,7 +10,7 @@ mvn clean install
 
 After running this command, you'll find the JAR file in the target directory of your project.
 
- Creating a Docker Image for Your Application
+# Creating a Docker Image for Your Application
 To create a Docker image, you need a Dockerfile. A Dockerfile is a text file that contains all the commands needed to build a Docker image.
 Here's a basic Dockerfile for a Spring Boot application:
 
@@ -26,7 +26,7 @@ COPY target/my-app.jar /app/my-app.jar
  Make port 8080 available to the world outside this container
 EXPOSE 8080
 
- Run the JAR file 
+ # Run the JAR file 
 ENTRYPOINT ["java","-jar","/app/my-app.jar"]
 
 Replace my-app.jar with the name of your JAR file. Save this Dockerfile in the root directory of your project.
@@ -37,7 +37,8 @@ docker build -t my-app .
 Replace my-app with whatever you want to name your Docker image. The .
 specifies that Docker should look for the Dockerfile in the current directory.
 
-#Running the Docker Image
+# Running the Docker Image
+
 After you've built your Docker image, you can run it in a Docker container. Use the following command to do this:
 
 docker run -p 8080:8080 -d my-app
